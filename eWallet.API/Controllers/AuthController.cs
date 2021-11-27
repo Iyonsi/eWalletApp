@@ -19,6 +19,7 @@ namespace eWallet.API.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPost("Forget PassWord")]
         public IActionResult ForgetPassWord()
         {
@@ -31,7 +32,7 @@ namespace eWallet.API.Controllers
             return Ok();
         }
 
-        [Authorize]
+        
         [HttpPost("LogOut")]
         public IActionResult LogOut()
         {
