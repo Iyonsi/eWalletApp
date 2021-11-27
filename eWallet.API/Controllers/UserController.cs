@@ -25,13 +25,19 @@ namespace eWallet.API.Controllers
          }
 
 
-         [HttpPut("ChangeRole")]
+         [HttpPut("Role/Change")]
          public IActionResult ChangeRole()
          {
              return Ok();
          }
 
-        [HttpPut("RequestAccountDeactivation/{Id}/{UserId}")]
+        [HttpPut("Deactivation/Approve")]
+        public IActionResult ApproveDeactivateUser()
+        {
+            return Ok();
+        }
+
+        [HttpPut("Deactivation/Request/{Id}/{UserId}")]
         public IActionResult RequestAccountDeactivateUser()
         {
             return Ok();
