@@ -49,6 +49,11 @@ namespace eWallet.API.Controllers
              return Ok();
          }
 
+        [HttpPut("User/Update")]
+        public IActionResult Update()
+        {
+            return Ok();
+        }
 
         [HttpDelete]
         public IActionResult Delete()
@@ -56,5 +61,6 @@ namespace eWallet.API.Controllers
             return Ok();
         }
 
+      
     }
 }
