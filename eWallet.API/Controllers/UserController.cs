@@ -31,11 +31,24 @@ namespace eWallet.API.Controllers
              return Ok();
          }
 
-         [HttpPut("Deactivate/{Id}/{UserId}")]
+        [HttpPut("RequestAccountDeactivation/{Id}/{UserId}")]
+        public IActionResult RequestAccountDeactivateUser()
+        {
+            return Ok();
+        }
+
+        [HttpPut("Deactivate/{Id}/{UserId}")]
          public IActionResult DeactivateUser()
          {
              return Ok();
          }
+
+
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            return Ok();
+        }
 
     }
 }
