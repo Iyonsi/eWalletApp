@@ -1,6 +1,11 @@
-﻿namespace eWallet.API.Data_Access.Repositories.Database
+﻿using eWallet.APIModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace eWallet.API.Data_Access.Repositories.Database
 {
-    public class IUserRepository
+    public interface IUserRepository : ICRUDRepo
     {
+        Task<List<User>> GetUsers();
     }
 }

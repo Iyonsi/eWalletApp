@@ -8,7 +8,7 @@ namespace eWallet.API.Models
 {
     public class Wallet
     {
-        public string WalletId = Guid.NewGuid().ToString();
+        public string Id = Guid.NewGuid().ToString();
         public string WalletType { get; set; }
         public Currency Currencies { get; set; }
         public byte Status { get; set; } = 0;

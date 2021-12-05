@@ -1,4 +1,6 @@
 using eWallet.API.Controllers;
+using eWallet.API.Data_Access.Repositories;
+using eWallet.API.Data_Access.Repositories.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static eWallet.API.Data_Access.Repositories.Database.UserRepositories;
 
 namespace eWallet.API
 {
@@ -31,6 +34,12 @@ namespace eWallet.API
         {
 
             services.AddControllers();
+
+            services.AddScoped<IADOOperations, ADOOperation>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            // services.AddScoped<IUserService, UserService>();
+
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eWallet.API", Version = "v1" });
@@ -86,8 +95,9 @@ namespace eWallet.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IADOOperations aDOOperations)
         {
+            SetupSeed.SeedMe(aDOOperations).Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -98,11 +108,15 @@ namespace eWallet.API
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+          
         }
     }
 }

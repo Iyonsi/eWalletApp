@@ -2,7 +2,7 @@
 
 namespace eWallet.API.Data_Access.Repositories.Database
 {
-    public interface IADOOperation
+    public interface IADOOperations
     {
         Task<bool> ExecuteForQuery(string stmt);
         Task<bool> ExecuteForTransactionQuery(string stmt, string stmt2);
