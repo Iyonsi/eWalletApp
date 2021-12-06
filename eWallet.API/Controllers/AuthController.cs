@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using eWallet.API.DTOs;
+using eWallet.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace eWallet.API.Controllers
 {
@@ -7,6 +11,12 @@ namespace eWallet.API.Controllers
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
+        private readonly IUserService _userService;
+        public AuthController(IUserService user)
+        {
+            _userService = user;
+        }
+
         [HttpPost("Register")]
         public IActionResult Register()
         {
@@ -14,9 +24,22 @@ namespace eWallet.API.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login()
+        public async Task<IActionResult> Login(LoginDTO model)
         {
-            return Ok();
+            try
+            {
+                var response = await _userService.Login(model.email, model.password);
+                if (!response.status)
+                    return BadRequest("Error loging in ");
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+
+            }
+
+
         }
 
         [Authorize]

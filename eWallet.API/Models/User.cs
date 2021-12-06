@@ -34,13 +34,13 @@ namespace eWallet.APIModels
         [Required(ErrorMessage =" Password is requried")]
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         [DataType(DataType.Password)]
-        public byte PasswordHash { get; set; }
+        public byte[] PasswordHash { get; set; }
 
         [Required(ErrorMessage = " Password is requried")]
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         [DataType(DataType.Password)]
         [Compare("Password")]
-        public byte PasswordSalt { get; set; }
+        public byte[] PasswordSalt { get; set; }
 
         public List<Roles> Role { get; set; }
 

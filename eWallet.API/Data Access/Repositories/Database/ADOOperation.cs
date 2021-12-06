@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using eWallet.API.Models;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -25,6 +27,50 @@ namespace eWallet.API.Data_Access.Repositories.Database
                 throw new Exception(dbExc.Message);
             }
            
+        }
+
+        public async Task<List<ExecuterReaderResult>> ExecuteForReader(string stmt, params string[] fields)
+        {
+            if (_conn == null)
+                throw new Exception("Connection not established!");
+
+            var listOfRows = new List<ExecuterReaderResult>();
+            var row = new ExecuterReaderResult();
+
+            try
+            {
+                using (var cmd = new SqlCommand(stmt, _conn))
+                {
+                    _conn.Open();
+                    var res = await cmd.ExecuteReaderAsync();
+
+                    while (res.HasRows)
+                    {
+                        while (res.Read())
+                        {
+                            foreach (var field in fields)
+                            {
+                                row.Fields.Add(field);
+                                row.Values.Add(res[field].ToString());
+                            }
+                            listOfRows.Add(row);
+
+                        }
+
+                        await res.NextResultAsync();
+                    }
+                }
+            }
+            catch (DbException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _conn.Close();
+            }
+
+            return listOfRows;
         }
 
         public async Task<bool> ExecuteForQuery(string stmt)

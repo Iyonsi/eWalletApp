@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WalkingSkeletonApi.DTOs
+namespace eWallet.API.DTOs
 {
     public class LoginSuccess
     {

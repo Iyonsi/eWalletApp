@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WalkingSkeletonApi.Commons
+namespace eWallet.API.Commons
 {
     public static class Util
     {
@@ -26,7 +26,7 @@ namespace WalkingSkeletonApi.Commons
 
         public static bool CompareHash(string password,byte[] passwordHash, byte[] passwordSalt)
         {
-            using var hash = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            using( var hash = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var genhash = hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for(int i = 0; i < genhash.Length; i++)
