@@ -13,4 +13,5 @@ namespace eWallet.API.Models
             Values = new List<string>();
 
         }
+    }
 }
