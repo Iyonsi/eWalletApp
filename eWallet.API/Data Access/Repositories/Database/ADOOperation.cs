@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -11,10 +12,13 @@ namespace eWallet.API.Data_Access.Repositories.Database
     public  class ADOOperation : IADOOperations
     {
         private readonly string _constr;
+        private SqlCommand _cmd;
         private readonly SqlConnection _conn;
+        private readonly IConfiguration _configuration;
 
         public ADOOperation(IConfiguration configuration)
         {
+            _configuration = configuration;
             _constr = configuration.GetSection("ConnectionStrings:Default").Value;
 
             try
@@ -145,6 +149,75 @@ namespace eWallet.API.Data_Access.Repositories.Database
             }
 
             return transState;
+        }
+
+        public async Task<bool> ExecuteForNonQueryProcedure(string procedureName, params SqlParameter[] parameters)
+        {
+            
+            int status = 0;
+
+            if (_conn == null) throw new Exception("Failed to connect");
+
+            try
+            {
+                using (_cmd = _conn.CreateCommand())
+                {
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.CommandText = procedureName;
+
+                    if (parameters != null)
+                    {
+                        _cmd.Parameters.AddRange(parameters);
+                    }
+                    _conn.Open();
+                    status = await _cmd.ExecuteNonQueryAsync();
+                    if (status < 1) return false;
+                }
+                return true;
+            }
+            catch (DbException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public async Task<string> ExecuteForScalar(string procedureName, params SqlParameter[] parameters)
+        {
+            GetConnection();
+            string result = string.Empty;
+
+            if (_newCon == null) throw new Exception("Failed to connect");
+
+            try
+            {
+                using (_cmd = _newCon.CreateCommand())
+                {
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.CommandText = procedureName;
+
+                    if (parameters != null)
+                    {
+                        _cmd.Parameters.AddRange(parameters);
+                    }
+                    _newCon.Open();
+                    var ret = await _cmd.ExecuteScalarAsync();
+                    _cmd.Parameters.Clear();
+                    if (ret != null) result = Convert.ToString(ret);
+                }
+            }
+            catch (DbException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _newCon.Close();
+            }
+            return result;
         }
     }
 }
