@@ -35,13 +35,13 @@ namespace eWallet.APIModels.DTOs
         [Required(ErrorMessage = " Password is requried")]
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         [DataType(DataType.Password)]
-        public string PassWord { get; set; }
+        public string Password { get; set; }
 
         [Required(ErrorMessage = " Password is requried")]
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         [DataType(DataType.Password)]
         [Compare("Password")]
-        public string ComfirmPassWord { get; set; }
+        public string ComfirmPassword { get; set; }
         public CreatWalletDTO Wallet { get; set; }
     }
 }

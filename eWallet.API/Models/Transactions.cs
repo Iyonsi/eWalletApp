@@ -7,11 +7,11 @@ namespace eWallet.API.Models
 {
     public class Transactions
     {
-        public string TransactionId { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Sender { get; set; }
-        public string Desscription  { get; set; }
+        public string Description  { get; set; }
         public string TransactionType  { get; set; }
-        public DateTime TransactionDate  { get; set; }
+        public DateTime Date  { get; set; }
         public string Currency  { get; set; }
         public decimal Amount  { get; set; }
         public byte Status  { get; set; }
