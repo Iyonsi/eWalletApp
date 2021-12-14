@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eWallet.APIModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,6 @@ namespace eWallet.API.Controllers
 {
         public interface IJWTService
         {
-            public string GenerateToken();
+        public string GenerateToken(User user, List<string> userRoles);
         }
 }
