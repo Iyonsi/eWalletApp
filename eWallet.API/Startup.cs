@@ -95,7 +95,8 @@ namespace eWallet.API
             services.AddDbContextPool<EwalletDbContext>(
                options => options.UseSqlServer(Configuration.GetConnectionString("Default"))
                );
-
+            services.AddTransient<SeederClass>();
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ZiggyContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
