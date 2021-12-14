@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace eWallet.API.Models
 {
-    public class Currency
+    public class Currency : BaseEntity
     {
         public string Id = Guid.NewGuid().ToString();
         public string CurrencyName { get; set; }

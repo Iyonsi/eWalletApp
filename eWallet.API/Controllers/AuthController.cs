@@ -24,12 +24,12 @@ namespace eWallet.API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginDTO model)
+        public async Task<IActionResult> Login(LoginDto model)
         {
             try
             {
-                var response = await _userService.Login(model.email, model.password);
-                if (!response.status)
+                var response = await _userService.Login(model.Email, model.Password);
+                if (!response.LoginStatus)
                     return BadRequest("Error loging in ");
                 return Ok(response);
             }

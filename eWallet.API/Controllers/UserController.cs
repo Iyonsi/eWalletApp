@@ -26,13 +26,13 @@ namespace eWallet.API.Controllers
         public IActionResult GetUsers()
         {
             // map data from db to dto to reshape it and remove null fields
-            var listOfUsersToReturn = new List<UserToReturnDto>();
+            var listOfUsersToReturn = new List<UserToReturn>();
             var users = _userService.Users;
             if (users != null)
             {
                 foreach (var user in users)
                 {
-                    listOfUsersToReturn.Add(new UserToReturnDto
+                    listOfUsersToReturn.Add(new UserToReturn
                     {
                         Id = user.Id,
                         LastName = user.LastName,
@@ -54,11 +54,11 @@ namespace eWallet.API.Controllers
         public async Task<IActionResult> GetUser(string email)
         {
             // map data from db to dto to reshape it and remove null fields
-            var UserToReturn = new UserToReturnDto();
+            var UserToReturn = new UserToReturn();
             var user = await _userService.GetUser(email);
             if (user != null)
             {
-                UserToReturn = new UserToReturnDto
+                UserToReturn = new UserToReturn
                 {
                     Id = user.Id,
                     LastName = user.LastName,
@@ -76,7 +76,7 @@ namespace eWallet.API.Controllers
        
 
         [HttpPost("add-user")]
-        public async Task<IActionResult> AddUser(RegisterDto model)
+        public async Task<IActionResult> AddUser(UserToAdd model)
         {
             // Map DTO to User
             var user = new User

@@ -22,8 +22,8 @@ namespace eWallet.API.EfCore_Models
         public string WalletId { get; set; }
         public string StatusId { get; set; }
         public Status Status { get; set; }
-        public string TranxTypeId { get; set; }
-        public TransactionType TranxType { get; set; }
+        public string TransactionTypeId { get; set; }
+        public TransactionType TransactionType { get; set; }
     }
 
 }

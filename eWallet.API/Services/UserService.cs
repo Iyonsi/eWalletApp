@@ -58,9 +58,9 @@ namespace eWallet.API.Services
                 var response = await _userRepo.GetUserByEmail(email);
                 if (Util.CompareHash(password, response.PasswordHash, response.PasswordSalt))
                 {
-                    success.status = true;
+                    success.LoginStatus = true;
                     success.Id = response.Id;
-                    success.token = _jWTService.GenerateToken(response, roles);
+                    success.Token = _jWTService.GenerateToken(response, roles);
                 }
 
 

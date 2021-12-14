@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace eWallet.API.EfCore_Models
 {
-    public class Currency
+    public class Currency :BaseEntity
     {
         [Required]
         [MinLength(3, ErrorMessage = "Currency Name should be more than 3 letters")]
