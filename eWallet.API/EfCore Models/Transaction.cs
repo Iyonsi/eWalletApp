@@ -12,12 +12,10 @@ namespace eWallet.API.EfCore_Models
         public string Description { get; set; }
 
 
-        [Required]
-        [MinLength(8, ErrorMessage = "SenderName should not be below 2 letters")]
+        [Required] 
         public string SenderWalletId { get; set; }
 
         [Required]
-        [MinLength(8, ErrorMessage = "Reciepient Wallet should not be below 2 letters")]
         public string RecipientWalletId { get; set; }
 
         public Wallet Wallets { get; set; }
@@ -25,7 +23,7 @@ namespace eWallet.API.EfCore_Models
         public string StatusId { get; set; }
         public Status Status { get; set; }
         public string TranxTypeId { get; set; }
-        public TranxType TranxType { get; set; }
+        public TransactionType TranxType { get; set; }
     }
 
 }

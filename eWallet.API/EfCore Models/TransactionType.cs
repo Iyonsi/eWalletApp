@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace ZiggyWalletFinalEdition.Models
+namespace eWallet.API.EfCore_Models
 {
-    public class TranxType : BaseEntity
+    public class TransactionType : BaseEntity
     {
         public string Name { get; set; }
         public List<Transaction> Transactions { get; set; }

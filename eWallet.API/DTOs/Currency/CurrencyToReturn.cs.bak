@@ -1,0 +1,10 @@
+﻿namespace Ewalle2021.DTOs
+{
+    public class CurrencyToReturn
+    {
+        public string Name { get; set; }
+        public string ShortCode { get; set; }
+        public decimal Balance { get; set; }
+        public bool IsMain { get; set; } = false;
+    }
+}

@@ -1,0 +1,20 @@
+﻿using System;
+using Ewalle2021.Models;
+
+namespace Ewalle2021.DTOs
+{
+    public class trxMsg
+    {
+        public string TrxId { get; set; } = Guid.NewGuid().ToString();
+
+        public string Type { get; set; }
+
+        public Currency Currency { get; set; }
+
+        public decimal Amount { get; set; }
+
+        public User ToWallet { get; set; }
+
+        public User FromWallet { get; set; }
+    }
+}

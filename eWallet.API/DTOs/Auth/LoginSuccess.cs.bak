@@ -1,0 +1,9 @@
+﻿namespace Ewalle2021.DTOs
+{
+    public class LoginSuccess
+    {
+        public string Id { get; set; }
+        public string Token { get; set; }
+        public bool LoginStatus { get; set; } = false;
+    }
+}

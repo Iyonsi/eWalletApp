@@ -187,14 +187,14 @@ namespace eWallet.API.Data_Access.Repositories.Database
 
         public async Task<string> ExecuteForScalar(string procedureName, params SqlParameter[] parameters)
         {
-            GetConnection();
+            
             string result = string.Empty;
 
-            if (_newCon == null) throw new Exception("Failed to connect");
+            if (_conn == null) throw new Exception("Failed to connect");
 
             try
             {
-                using (_cmd = _newCon.CreateCommand())
+                using (_cmd = _conn.CreateCommand())
                 {
                     _cmd.CommandType = CommandType.StoredProcedure;
                     _cmd.CommandText = procedureName;
@@ -203,7 +203,7 @@ namespace eWallet.API.Data_Access.Repositories.Database
                     {
                         _cmd.Parameters.AddRange(parameters);
                     }
-                    _newCon.Open();
+                    _conn.Open();
                     var ret = await _cmd.ExecuteScalarAsync();
                     _cmd.Parameters.Clear();
                     if (ret != null) result = Convert.ToString(ret);
@@ -215,9 +215,19 @@ namespace eWallet.API.Data_Access.Repositories.Database
             }
             finally
             {
-                _newCon.Close();
+                _conn.Close();
             }
             return result;
+        }
+
+        public Task<TData> Reader<TData>(string procedureName, string FieldName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ExecuterReaderResult>> ExecuteForReaderProcedure(string procedureName, params string[] fields)
+        {
+            throw new NotImplementedException();
         }
     }
 }

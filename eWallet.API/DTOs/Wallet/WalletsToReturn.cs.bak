@@ -1,0 +1,21 @@
+﻿using System.Collections.Generic;
+using Ewalle2021.Models;
+
+namespace Ewalle2021.DTOs
+{
+    public class WalletsToReturn
+    {
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public Status Status { get; set; }
+        public decimal Balance { get; set; }
+        public bool IsMain { get; set; } = false;
+
+        public string UserId { get; set; }
+        public User User { get; set; }
+        public List<Currency> Currencies { get; set; }
+        public List<Transaction> Transactions { get; set; }
+
+        
+    }
+}

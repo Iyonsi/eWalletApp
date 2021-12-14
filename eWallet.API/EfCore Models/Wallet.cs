@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ZiggyWalletFinalEdition.Models
+namespace eWallet.API.EfCore_Models
 {
     public class Wallet : BaseEntity
     {
 
         [Required]
-        [MinLength(5, ErrorMessage = "Wallet Name should not be below 5 letters")]
+        [MinLength(5, ErrorMessage = "Wallet Name should be above 5 letters")]
         public string Name { get; set; }
 
 
         [Required]
-        [MinLength(8, ErrorMessage = "Wallet Address should not be below 16 letters")]
+        [MinLength(8, ErrorMessage = "Wallet Address should be above 8 letters")]
         public string Address { get; set; }
 
         [Required]
@@ -22,11 +22,8 @@ namespace ZiggyWalletFinalEdition.Models
 
         public AppUser AppUsers { get; set; }
         public string AppUserId { get; set; }
-        public List<WalletCurrency> WalletCurrency { get; set; }
+        public List<WalletCurrency> WalletCurrency { get; set; } = new List<WalletCurrency>();
 
-        public Wallet()
-        {
-            WalletCurrency = new List<WalletCurrency>();
-        }
+       
     }
 }

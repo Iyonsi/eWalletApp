@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eWallet.API.DTOs
+namespace Ewalle2021.DTOs
 {
     public class RegisterSuccessDto
     {
@@ -11,6 +11,5 @@ namespace eWallet.API.DTOs
         public string UserId { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
-
     }
 }

@@ -17,6 +17,6 @@ namespace eWallet.API.EfCore_Models
         public float Balance { get; set; } = 0.00F;
         public bool IsMain { get; set; } = false;
 
-        public List<WalletCurrency> WalletCurrency { get; set; }
+        public List<WalletCurrency> WalletCurrency { get; set; } = new List<WalletCurrency>();
     }
 }

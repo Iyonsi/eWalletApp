@@ -1,0 +1,8 @@
+﻿namespace Ewalle2021.DTOs
+{
+    public class UserRoleToEdit
+    {
+        public string id { get; set; }
+        public string UserRole { get; set; }
+    }
+}
