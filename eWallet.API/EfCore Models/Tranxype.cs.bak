@@ -1,0 +1,10 @@
+﻿using System.Collections.Generic;
+
+namespace Ewalle2021.Models
+{
+    public class TranxType : BaseEntity
+    {
+        public string Name { get; set; }
+        public List<Transaction> Transactions { get; set; }
+    }
+}
