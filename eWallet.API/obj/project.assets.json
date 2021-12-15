@@ -7186,11 +7186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Decagon\\Source\\Repos\\week-8-Iyonsi\\eWallet.API\\eWallet.API.csproj",
+      "projectUniqueName": "C:\\Users\\Decagon\\Desktop\\week-8-Iyonsi\\eWallet.API\\eWallet.API.csproj",
       "projectName": "eWallet.API",
-      "projectPath": "C:\\Users\\Decagon\\Source\\Repos\\week-8-Iyonsi\\eWallet.API\\eWallet.API.csproj",
+      "projectPath": "C:\\Users\\Decagon\\Desktop\\week-8-Iyonsi\\eWallet.API\\eWallet.API.csproj",
       "packagesPath": "C:\\Users\\Decagon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Decagon\\Source\\Repos\\week-8-Iyonsi\\eWallet.API\\obj\\",
+      "outputPath": "C:\\Users\\Decagon\\Desktop\\week-8-Iyonsi\\eWallet.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Decagon\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -12,6 +12,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using eWallet.API.EfCore_Models;
 
 namespace eWallet.API
 {
@@ -95,8 +97,8 @@ namespace eWallet.API
             services.AddDbContextPool<EwalletDbContext>(
                options => options.UseSqlServer(Configuration.GetConnectionString("Default"))
                );
-            services.AddTransient<SeederClass>();
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ZiggyContext>();
+            services.AddTransient<SeederClassEfCore>();
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<EwalletDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
