@@ -1,4 +1,5 @@
 ﻿using eWallet.APIModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -16,20 +17,27 @@ namespace eWallet.API.Controllers
     {
 
         private readonly IConfiguration _config;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public JWTService(IConfiguration config)
+        public JWTService(IConfiguration config, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _config = config;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
-        public string GenerateToken(User user, List<string> userRoles)
+        public async Task<string> GenerateToken(User user)
         {
             // add claims
-            var claims = new List<Claim>
+            List <Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.Email)
             };
 
             // add roles to claims
+            var userRoles = await _userManager.GetRolesAsync(user);
+
             foreach (var role in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));

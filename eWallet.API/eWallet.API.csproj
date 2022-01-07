@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Implementations\" />
+    <Folder Include="Services\Interface\" />
   </ItemGroup>
 
 </Project>
