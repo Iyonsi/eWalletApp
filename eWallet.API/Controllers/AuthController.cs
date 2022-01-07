@@ -18,7 +18,7 @@ namespace eWallet.API.Controllers
         }
 
         [HttpPost("Register")]
-        public IActionResult Register()
+        public IActionResult Register(UserToAdd user)
         {
             return Ok();
         }
@@ -26,9 +26,9 @@ namespace eWallet.API.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto model)
         {
-            try
+           if (ModelState.IsValid)
             {
-                var response = await _userService.Login(model.Email, model.Password);
+                ResponseDto<string> response = await _userService.Login(model.Email, model.Password);
                 if (!response.LoginStatus)
                     return BadRequest("Error loging in ");
                 return Ok(response);
