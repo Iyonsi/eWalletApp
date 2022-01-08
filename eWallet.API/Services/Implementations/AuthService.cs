@@ -35,7 +35,6 @@ namespace eWallet.API.Services.Implementations
                 {
                     new ErrorItem
                     {
-
                         ErrorMessages = new List<string>() { "Invalid login request" }
                     }
             };

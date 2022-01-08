@@ -1,6 +1,10 @@
-﻿using eWallet.API.DTOs;
+﻿using eWallet.API.Commons;
+using eWallet.API.DTOs;
 using eWallet.API.Services;
+using eWallet.API.Services.Implementations;
+using eWallet.APIModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -8,13 +12,16 @@ using System.Threading.Tasks;
 namespace eWallet.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IUserService _userService;
-        public AuthController(IUserService user)
+        private readonly IAuthService _authService;
+        private readonly UserManager<User> _userManager;
+
+        public AuthController(IAuthService authService, UserManager<User> userManager )
         {
-            _userService = user;
+            _authService = authService;
+            _userManager = userManager;
         }
 
         [HttpPost("Register")]
@@ -28,18 +35,14 @@ namespace eWallet.API.Controllers
         {
            if (ModelState.IsValid)
             {
-                ResponseDto<string> response = await _userService.Login(model.Email, model.Password);
-                if (!response.LoginStatus)
+                ResponseDto<string> response = await _authService.Login(model.Email, model.Password);
+                if (!response.Status)
                     return BadRequest("Error loging in ");
                 return Ok(response);
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
 
-            }
-
-
+            ModelState.AddModelError("Failed", $"Invalid payLoad");
+            return BadRequest(Util.BuildResponse<string>(false, "Unable to login", ModelState, ""));
         }
 
         [Authorize]
